@@ -19,7 +19,6 @@ function Calculator() {
   const [cryptoData, setCryptoData] = useState([]);
 
   const cryptoCompareApi =
-    // "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,DASH,ETH,LTC,DOGE&tsyms=USD&api_key=CRYPTO_COMPARE_API_KEY";
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20dash%2C%20ethereum%2C%20litecoin%2C%20dogecoin&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
   useEffect(() => {
@@ -29,20 +28,6 @@ function Calculator() {
     };
     fetchData();
   }, []);
-
-  console.log(`cryptoData`, cryptoData);
-
-
-  const coinDisplay = cryptoData.map((item) => {
-    const coinId = item.image
-    const coinPrice = clientUtilities.formatMoney(item.current_price)
-    const coinName = item.symbol
-    
-    return <div>
-       <img className="loan-calculator__coin-symbol" src={coinId} alt=""/>  {coinPrice} {coinName}
-    </div>
-
-  });
 
   // principal & interest calculations
   const loanAmount = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
@@ -93,6 +78,20 @@ function Calculator() {
   const collateralNeededCurrencyFormat = clientUtilities.formatMoney(
     Math.round(collateralNeeded)
   );
+
+  const coinDisplay = cryptoData.map((item) => {
+    const coinId = item.image;
+    const coinPrice = clientUtilities.formatMoney(collateralNeeded / (item.current_price))
+    // clientUtilities.formatMoney(item.current_price);
+    const coinName = item.symbol.toUpperCase();
+
+    return (
+      <div>
+        <img className="loan-calculator__coin-symbol" src={coinId} alt="" />{" "}
+        {coinPrice} {coinName}
+      </div>
+    );
+  });
 
   return (
     <div>
