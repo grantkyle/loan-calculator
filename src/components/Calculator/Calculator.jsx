@@ -9,10 +9,24 @@ const loanAmountStyles = {
 };
 
 function Calculator() {
-  const [loanAmount, setLoanAmount] = useState("");
+  const [userLoanAmount, setUserLoanAmount] = useState("");
   const [loanTerm, setLoanTerm] = useState(12);
   const [interestRate, setInterestRate] = useState("10");
   const [repaymentOption, setRepaymentOption] = useState("interestOnly");
+
+  console.log(userLoanAmount);
+
+  // principal and interest
+  const loanAmount = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
+  const interestRateNumber = parseInt(interestRate) / 1200;
+  const monthlyPayment =
+    (loanAmount * interestRateNumber) /
+    (1 - Math.pow(1 / (1 + interestRateNumber), loanTerm));
+  const totalLoanCost = monthlyPayment * loanTerm;
+  const totalInterest = totalLoanCost - loanAmount;
+  console.log(`totalInterest`, totalInterest);
+
+  
   return (
     <div>
       <h1>Loan Calculator</h1>
@@ -27,6 +41,9 @@ function Calculator() {
             max={25000000}
             inside
             styles={loanAmountStyles}
+            onChange={(e) => {
+              setUserLoanAmount(e.target.value);
+            }}
           >
             <InputGroup.Addon>$</InputGroup.Addon>
             <Input placeholder="Enter amount" />
@@ -80,7 +97,7 @@ function Calculator() {
             <Radio
               className="loan-calculator__ltv-selections"
               type="number"
-              value="10"
+              value="12"
             >
               60%
             </Radio>
@@ -118,8 +135,9 @@ function Calculator() {
             <p>({loanTerm - 1} Months)</p>
             <p>Last Payment</p>
             <p>Loan Amount</p>
+            {loanAmount}
             <p>Interest Rate</p>
-            {interestRate}%<p>Total Loan Cost</p>
+            {interestRate}.00%<p>Total Loan Cost</p>
             <p>Interest</p>
             <p>Collateral Needed </p>
             $$ USD worth of: cryptoValues
@@ -128,7 +146,9 @@ function Calculator() {
           <div className="loan-calculator__calculation-display">
             <p>({loanTerm} Months)</p>
             <p>Loan Amount</p>
-            <p>Interest Rate</p> {interestRate}%<p>Total Loan Cost</p>
+            {loanAmount}
+            <p>Interest Rate</p> {interestRate}.00%
+            <p>Total Loan Cost</p>
             <p>Interest</p>
             <p>Collateral Needed</p>
             $$ USD worth of:
