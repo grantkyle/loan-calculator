@@ -10,6 +10,6 @@ export const formatMoney = (amount) => {
   return formatter.format(amount);
 };
 
-export const numberWithCommas = (x) => {
-  return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+export const numberWithCommas = (num) => {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 };

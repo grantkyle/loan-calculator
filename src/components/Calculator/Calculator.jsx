@@ -3,7 +3,6 @@ import axios from "axios";
 import "./styles.scss";
 import "rsuite/dist/styles/rsuite-default.min.css";
 import { Slider, InputGroup, Input, RadioGroup, Radio } from "rsuite";
-import CurrencyInput from "react-currency-input-field";
 import { clientUtilities } from "../clientUtilities";
 
 const loanAmountStyles = {
@@ -29,6 +28,18 @@ function Calculator() {
     };
     fetchData();
   }, []);
+
+  const handleOnBlur = (e) => {
+    const loanRange = parseInt(userLoanAmount);
+    console.log(`loanRange`, loanRange);
+    if (loanRange < 5000) {
+      console.log("Loan amount must be greater than $5,000");
+    } else if (loanRange > 25000000) {
+      console.log("Loan amount must be less than $25,000,000");
+    }
+    setUserLoanAmount(e.target.value);
+  };
+  //   console.log(`userLoanAmount`, typeof userLoanAmount);
 
   // principal & interest calculations
   const loanAmount = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
@@ -102,19 +113,8 @@ function Calculator() {
       <div className="loan-calculator__container">
         <div className="loan-calculator__input-display">
           <p>How much do you want to borrow?</p>
-          <CurrencyInput
-            id="input-example"
-            prefix="$"
-            name="input-name"
-            placeholder="Please enter a number"
-            defaultValue={5000}
-            decimalsLimit={0}
-            onChange={(e) => {
-              setUserLoanAmount(e.target.value);
-            }}
-          />
-          
-          {/* <InputGroup
+
+          <InputGroup
             type="number"
             defaultValue={5000}
             min={5000}
@@ -124,10 +124,11 @@ function Calculator() {
             onChange={(e) => {
               setUserLoanAmount(e.target.value);
             }}
+            onBlur={handleOnBlur}
           >
             <InputGroup.Addon>$</InputGroup.Addon>
             <Input placeholder="Enter amount" />
-          </InputGroup> */}
+          </InputGroup>
           <p>How long do you need to pay back?</p>
           <Slider
             type="range"
@@ -177,7 +178,7 @@ function Calculator() {
             <Radio
               className="loan-calculator__ltv-selections"
               type="number"
-              value="12"
+              value="10"
             >
               60%
             </Radio>
@@ -217,7 +218,7 @@ function Calculator() {
             <p>Last Payment</p>
             {interestOnlyLastPaymentCurrencyFormat}
             <p>Loan Amount</p>
-            {interestOnlyTotalLoanCostCurrencyFormat}
+            {loanAmountCurrencyFormat}
             <p>Interest Rate</p>
             {interestRate}.00%
             <p>Total Loan Cost</p>
