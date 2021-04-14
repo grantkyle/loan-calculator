@@ -170,11 +170,10 @@ const Calculator = () => {
             How long do you need to pay back?
           </p>
           <Slider
-            // className="loan-calculator__input-containers"
+            className="loan-calculator__loan-term-slider"
             type="range"
             defaultValue={12}
             step={1}
-            graduated
             progress
             min={3}
             max={36}
@@ -183,8 +182,12 @@ const Calculator = () => {
             }}
           />
           <br />
-          <b>{loanTerm} Months</b>
-          <p className="loan-calculator__input-labels">Loan-to-Value (LTV)</p>
+          <b className="loan-calculator__loan-term-display">
+            {loanTerm} months
+          </b>
+          <p className="loan-calculator__input-labels loan-calculator__ltv-label">
+            Loan-to-Value (LTV)
+          </p>
           <RadioGroup
             className="loan-calculator__input-containers"
             name="loanToValue"
@@ -233,19 +236,21 @@ const Calculator = () => {
           </RadioGroup>
           <p className="loan-calculator__input-labels">Repayment Option</p>
           <RadioGroup
-            className="loan-calculator__input-containers"
+            className="loan-calculator__repayment-option-radio"
             name="repaymentOptions"
             inline
             appearance="picker"
             defaultValue="interestOnly"
           >
             <Radio
+              className="loan-calculator__interest-only-repayment-option"
               value="interestOnly"
               onClick={() => setRepaymentOption("interestOnly")}
             >
               Interest Only
             </Radio>
             <Radio
+              className="loan-calculator__principal-repayment-option"
               value="interestPlusPrincipal"
               onClick={() => setRepaymentOption("interestPlusPrincipal")}
             >
@@ -260,32 +265,70 @@ const Calculator = () => {
               {interestOnlyMonthlyPaymentCurrencyFormat}
               <p>Last Payment</p>
               {interestOnlyLastPaymentCurrencyFormat}
-              <p>Loan Amount</p>
-              {userLoanAmount ? loanAmountCurrencyFormat : "$0"}
-              <p>Interest Rate</p>
-              {interestRate}.00%
-              <p>Total Loan Cost</p>
-              {interestOnlyTotalLoanCostCurrencyFormat}
-              <p>Interest</p>
-              {interestOnlyTotalInterestCurrencyFormat}
+              <div className="loan-calculator__display-row">
+                <div className="loan-calculator__display-items">
+                  <p className="loan-calculator__display-titles">Loan Amount</p>
+                  {userLoanAmount ? loanAmountCurrencyFormat : "$0"}
+                </div>
+                <div className="loan-calculator__display-items">
+                  <p className="loan-calculator__display-titles">
+                    Interest Rate
+                  </p>
+                  {interestRate}.00%
+                </div>
+              </div>
+              <div className="loan-calculator__display-row">
+                <div className="loan-calculator__display-items">
+                  <p className="loan-calculator__display-titles">
+                    Total Loan Cost
+                  </p>
+                  {interestOnlyTotalLoanCostCurrencyFormat}
+                </div>
+                <div className="loan-calculator__display-items">
+                  <p className="loan-calculator__display-titles">Interest</p>
+                  {interestOnlyTotalInterestCurrencyFormat}
+                </div>
+              </div>
               <p>Collateral Needed </p>
               {collateralNeededCurrencyFormat} USD worth of:
-              {coinDisplayValues}
+              <div className="loan-calculator__coin-display">
+                {coinDisplayValues}
+              </div>
             </div>
           ) : (
             <div>
               <p>Monthly Payment ({loanTerm} Months)</p>
               {monthlyPaymentCurrencyFormat}
-              <p>Loan Amount</p>
-              {userLoanAmount ? loanAmountCurrencyFormat : "$0"}
-              <p>Interest Rate</p> {interestRate}.00%
-              <p>Total Loan Cost</p>
-              {totalLoanCostCurrencyFormat}
-              <p>Interest</p>
-              {totalInterestCurrencyFormat}
+              <div className="loan-calculator__display-row">
+                <div className="loan-calculator__display-items">
+                  <p className="loan-calculator__display-titles">Loan Amount</p>
+                  {userLoanAmount ? loanAmountCurrencyFormat : "$0"}
+                </div>
+                <div className="loan-calculator__display-items">
+                  <p className="loan-calculator__display-titles">
+                    Interest Rate
+                  </p>
+                  {interestRate}.00%
+                </div>
+              </div>
+              <div className="loan-calculator__display-row">
+                <div className="loan-calculator__display-items">
+                  <p className="loan-calculator__display-titles">
+                    Total Loan Cost
+                  </p>
+                  {totalLoanCostCurrencyFormat}
+                </div>
+                <div className="loan-calculator__display-items">
+                  <p className="loan-calculator__display-titles">Interest</p>
+                </div>
+                {totalInterestCurrencyFormat}
+              </div>
               <p>Collateral Needed</p>
               {collateralNeededCurrencyFormat} USD worth of:
-              {coinDisplayValues}
+              <div className="loan-calculator__coin-display">
+                {" "}
+                {coinDisplayValues}
+              </div>
             </div>
           )}
         </div>

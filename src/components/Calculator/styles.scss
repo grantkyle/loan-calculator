@@ -8,36 +8,69 @@
   border: solid #ffffff 1px;
   border-radius: 3px;
   margin: 20px 0 0 0;
-//   padding: 0 0px 0 20px;
 }
 
 .loan-calculator__input-display-container {
   flex: 1;
   background-color: #252c46;
   color: #ffffff;
-  padding: 40px;
+  padding: 30px;
 }
 
 .loan-calculator__input-containers {
-    width: 100%;
-    margin-bottom: 30px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .loan-calculator__input-labels {
-    text-align: left;
-    padding-bottom: 10px;
+  text-align: left;
+  padding-bottom: 10px;
 }
 
 .loan-calculator__user-loan-amount-input {
-    background-color: #252c46 !important;
-    &:focus {
-color: #ffffff
-    }
+  background-color: #252c46 !important;
+  &:focus {
+    color: #ffffff;
+  }
+}
+
+.loan-calculator__loan-term-slider {
+    margin-bottom: -10px;
+}
+
+.loan-calculator__ltv-label {
+    margin-top: 20px;
+}
+
+.loan-calculator__ltv-selections {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.loan-calculator__repayment-option-radio {
+    width: 100%;
+}
+
+.loan-calculator__interest-only-repayment-option  {
+    margin-right: 3rem;
 }
 
 .loan-calculator__calculation-display-container {
-  background: #b2ebb5 !important;
+  background: #b2ebb5;
   flex: 1;
+}
+
+.loan-calculator__display-row {
+    display: flex;
+}
+
+.loan-calculator__display-items {
+    flex: 1;
+}
+
+.loan-calculator__display-titles {
+    font-weight: 500;
+    font-size: 10px;
 }
 
 .loan-calculator__coin-symbol {
