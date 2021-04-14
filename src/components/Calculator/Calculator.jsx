@@ -41,13 +41,32 @@ function Calculator() {
   const loanAmountCurrencyFormat = clientUtilities.formatMoney(
     parseInt(userLoanAmount)
   );
-  const monthlyPaymentCurrencyFormat = clientUtilities.formatMoney(Math.round(monthlyPayment));
-  const totalInterestCurrencyFormat = clientUtilities.formatMoney(Math.round(totalInterest));
+  const monthlyPaymentCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(monthlyPayment)
+  );
+  const totalInterestCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(totalInterest)
+  );
 
   // interest only formatted options
+  const interestOnlyTotalInterestCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(interestOnlyTotalInterest)
+  );
+  const interestOnlyTotalLoanCostCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(interestOnlyTotalLoanCost)
+  );
+  const interestOnlyMonthlyPaymentCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(interestOnlyMonthlyPayment)
+  );
+  const interestOnlyLastPaymentCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(interestOnlyLastPayment)
+  );
 
-  console.log(`totalLoanCostCurrencyFormat`, totalLoanCostCurrencyFormat);
-
+  // collateral calculations
+  const collateralNeeded = (2 / 3) * loanAmount + loanAmount;
+  const collateralNeededCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(collateralNeeded)
+  );
   return (
     <div>
       <h1>Loan Calculator</h1>
@@ -154,16 +173,19 @@ function Calculator() {
         {repaymentOption === "interestOnly" ? (
           <div className="loan-calculator__calculation-display">
             <p>Monthly Payment ({loanTerm - 1} Months)</p>
+            {interestOnlyMonthlyPaymentCurrencyFormat}
             <p>Last Payment</p>
+            {interestOnlyLastPaymentCurrencyFormat}
             <p>Loan Amount</p>
-            {loanAmountCurrencyFormat}
+            {interestOnlyTotalLoanCostCurrencyFormat}
             <p>Interest Rate</p>
             {interestRate}.00%
             <p>Total Loan Cost</p>
-            {totalLoanCostCurrencyFormat}
+            {interestOnlyTotalLoanCostCurrencyFormat}
             <p>Interest</p>
+            {interestOnlyTotalInterestCurrencyFormat}
             <p>Collateral Needed </p>
-            $$ USD worth of: cryptoValues
+            {collateralNeededCurrencyFormat} USD worth of:
           </div>
         ) : (
           <div className="loan-calculator__calculation-display">
@@ -177,7 +199,7 @@ function Calculator() {
             <p>Interest</p>
             {totalInterestCurrencyFormat}
             <p>Collateral Needed</p>
-            $$ USD worth of:
+            {collateralNeededCurrencyFormat} USD worth of:
           </div>
         )}
       </div>
