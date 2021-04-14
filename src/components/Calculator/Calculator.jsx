@@ -3,6 +3,7 @@ import axios from "axios";
 import "./styles.scss";
 import "rsuite/dist/styles/rsuite-default.min.css";
 import { Slider, InputGroup, Input, RadioGroup, Radio } from "rsuite";
+import CurrencyInput from "react-currency-input-field";
 import { clientUtilities } from "../clientUtilities";
 
 const loanAmountStyles = {
@@ -81,7 +82,9 @@ function Calculator() {
 
   const coinDisplay = cryptoData.map((item) => {
     const coinId = item.image;
-    const coinPrice = clientUtilities.formatMoney(collateralNeeded / (item.current_price))
+    const coinPrice = clientUtilities.formatMoney(
+      collateralNeeded / item.current_price
+    );
     // clientUtilities.formatMoney(item.current_price);
     const coinName = item.symbol.toUpperCase();
 
@@ -99,8 +102,19 @@ function Calculator() {
       <div className="loan-calculator__container">
         <div className="loan-calculator__input-display">
           <p>How much do you want to borrow?</p>
-
-          <InputGroup
+          <CurrencyInput
+            id="input-example"
+            prefix="$"
+            name="input-name"
+            placeholder="Please enter a number"
+            defaultValue={5000}
+            decimalsLimit={0}
+            onChange={(e) => {
+              setUserLoanAmount(e.target.value);
+            }}
+          />
+          
+          {/* <InputGroup
             type="number"
             defaultValue={5000}
             min={5000}
@@ -113,7 +127,7 @@ function Calculator() {
           >
             <InputGroup.Addon>$</InputGroup.Addon>
             <Input placeholder="Enter amount" />
-          </InputGroup>
+          </InputGroup> */}
           <p>How long do you need to pay back?</p>
           <Slider
             type="range"

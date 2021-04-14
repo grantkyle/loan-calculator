@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
+    "react-currency-input-field": "^3.3.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "rsuite": "^4.9.3",
