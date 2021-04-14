@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./styles.scss";
 import "rsuite/dist/styles/rsuite-default.min.css";
 import { Slider, InputGroup, Input, RadioGroup, Radio } from "rsuite";
@@ -15,7 +16,33 @@ function Calculator() {
   const [interestRate, setInterestRate] = useState("10");
   const [repaymentOption, setRepaymentOption] = useState("interestOnly");
 
-  console.log(userLoanAmount);
+  const [cryptoData, setCryptoData] = useState([]);
+
+  const cryptoCompareApi =
+    // "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,DASH,ETH,LTC,DOGE&tsyms=USD&api_key=CRYPTO_COMPARE_API_KEY";
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20dash%2C%20ethereum%2C%20litecoin%2C%20dogecoin&order=market_cap_desc&per_page=100&page=1&sparkline=false";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(cryptoCompareApi);
+      setCryptoData(result.data);
+    };
+    fetchData();
+  }, []);
+
+  console.log(`cryptoData`, cryptoData);
+
+
+  const coinDisplay = cryptoData.map((item) => {
+    const coinId = item.image
+    const coinPrice = clientUtilities.formatMoney(item.current_price)
+    const coinName = item.symbol
+    
+    return <div>
+       <img className="loan-calculator__coin-symbol" src={coinId} alt=""/>  {coinPrice} {coinName}
+    </div>
+
+  });
 
   // principal & interest calculations
   const loanAmount = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
@@ -25,7 +52,6 @@ function Calculator() {
     (1 - Math.pow(1 / (1 + interestRateNumber), loanTerm));
   const totalLoanCost = monthlyPayment * loanTerm;
   const totalInterest = totalLoanCost - loanAmount;
-  console.log(`totalInterest`, totalInterest);
 
   // interest only calculations
   const interestOnlyTotalInterest = loanAmount * interestRateNumber * loanTerm;
@@ -67,6 +93,7 @@ function Calculator() {
   const collateralNeededCurrencyFormat = clientUtilities.formatMoney(
     Math.round(collateralNeeded)
   );
+
   return (
     <div>
       <h1>Loan Calculator</h1>
@@ -186,6 +213,7 @@ function Calculator() {
             {interestOnlyTotalInterestCurrencyFormat}
             <p>Collateral Needed </p>
             {collateralNeededCurrencyFormat} USD worth of:
+            {coinDisplay}
           </div>
         ) : (
           <div className="loan-calculator__calculation-display">
@@ -200,6 +228,7 @@ function Calculator() {
             {totalInterestCurrencyFormat}
             <p>Collateral Needed</p>
             {collateralNeededCurrencyFormat} USD worth of:
+            {coinDisplay}
           </div>
         )}
       </div>
