@@ -113,6 +113,27 @@ function Calculator() {
             </Radio>
           </RadioGroup>
         </div>
+        {repaymentOption === "interestOnly" ? (
+          <div className="loan-calculator__calculation-display">
+            <p>({loanTerm - 1} Months)</p>
+            <p>Last Payment</p>
+            <p>Loan Amount</p>
+            <p>Interest Rate</p>
+            {interestRate}%<p>Total Loan Cost</p>
+            <p>Interest</p>
+            <p>Collateral Needed </p>
+            $$ USD worth of: cryptoValues
+          </div>
+        ) : (
+          <div className="loan-calculator__calculation-display">
+            <p>({loanTerm} Months)</p>
+            <p>Loan Amount</p>
+            <p>Interest Rate</p> {interestRate}%<p>Total Loan Cost</p>
+            <p>Interest</p>
+            <p>Collateral Needed</p>
+            $$ USD worth of:
+          </div>
+        )}
       </div>
     </div>
   );
