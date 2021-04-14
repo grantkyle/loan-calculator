@@ -10,7 +10,7 @@ const loanAmountStyles = {
   marginBottom: 10,
 };
 
-function Calculator() {
+const Calculator = () => {
   const [userLoanAmount, setUserLoanAmount] = useState("");
   const [loanTerm, setLoanTerm] = useState(12);
   const [interestRate, setInterestRate] = useState("10");
@@ -31,11 +31,14 @@ function Calculator() {
 
   const handleOnBlur = (e) => {
     const loanRange = parseInt(userLoanAmount);
+    // const resetUserLoanAmount
     console.log(`loanRange`, loanRange);
     if (loanRange < 5000) {
       console.log("Loan amount must be greater than $5,000");
+      window.location.reload();
     } else if (loanRange > 25000000) {
       console.log("Loan amount must be less than $25,000,000");
+      window.location.reload();
     }
     setUserLoanAmount(e.target.value);
   };
@@ -61,9 +64,11 @@ function Calculator() {
   const totalLoanCostCurrencyFormat = clientUtilities.formatMoney(
     Math.round(totalLoanCost)
   );
+
   const loanAmountCurrencyFormat = clientUtilities.formatMoney(
     parseInt(userLoanAmount)
   );
+
   const monthlyPaymentCurrencyFormat = clientUtilities.formatMoney(
     Math.round(monthlyPayment)
   );
@@ -91,8 +96,8 @@ function Calculator() {
     Math.round(collateralNeeded)
   );
 
-  const coinDisplay = cryptoData.map((item) => {
-    const coinId = item.image;
+  const coinDisplayValues = cryptoData.map((item) => {
+    const coinImage = item.image;
     const coinPrice = clientUtilities.formatMoney(
       collateralNeeded / item.current_price
     );
@@ -100,10 +105,10 @@ function Calculator() {
     const coinName = item.symbol.toUpperCase();
 
     return (
-      <div>
-        <img className="loan-calculator__coin-symbol" src={coinId} alt="" />{" "}
+      <li>
+        <img className="loan-calculator__coin-symbol" src={coinImage} alt="" />{" "}
         {coinPrice} {coinName}
-      </div>
+      </li>
     );
   });
 
@@ -121,6 +126,7 @@ function Calculator() {
             max={25000000}
             inside
             styles={loanAmountStyles}
+            value={userLoanAmount}
             onChange={(e) => {
               setUserLoanAmount(e.target.value);
             }}
@@ -218,7 +224,7 @@ function Calculator() {
             <p>Last Payment</p>
             {interestOnlyLastPaymentCurrencyFormat}
             <p>Loan Amount</p>
-            {loanAmountCurrencyFormat}
+            {userLoanAmount ? loanAmountCurrencyFormat : "$0"}
             <p>Interest Rate</p>
             {interestRate}.00%
             <p>Total Loan Cost</p>
@@ -227,14 +233,14 @@ function Calculator() {
             {interestOnlyTotalInterestCurrencyFormat}
             <p>Collateral Needed </p>
             {collateralNeededCurrencyFormat} USD worth of:
-            {coinDisplay}
+            {coinDisplayValues}
           </div>
         ) : (
           <div className="loan-calculator__calculation-display">
             <p>Monthly Payment ({loanTerm} Months)</p>
             {monthlyPaymentCurrencyFormat}
             <p>Loan Amount</p>
-            {loanAmountCurrencyFormat}
+            {userLoanAmount ? loanAmountCurrencyFormat : "$0"}
             <p>Interest Rate</p> {interestRate}.00%
             <p>Total Loan Cost</p>
             {totalLoanCostCurrencyFormat}
@@ -242,12 +248,14 @@ function Calculator() {
             {totalInterestCurrencyFormat}
             <p>Collateral Needed</p>
             {collateralNeededCurrencyFormat} USD worth of:
-            {coinDisplay}
+            <ul className="loan-calculator__coin-display">
+              {coinDisplayValues}
+            </ul>
           </div>
         )}
       </div>
     </div>
   );
-}
+};
 
 export default Calculator;
