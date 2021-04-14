@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./styles.scss";
 import "rsuite/dist/styles/rsuite-default.min.css";
 import { Slider, InputGroup, Input, RadioGroup, Radio } from "rsuite";
 
@@ -16,10 +17,9 @@ function Calculator() {
     <div>
       <h1>Loan Calculator</h1>
       <div className="loan-calculator__container">
-        <div className="loan-calculator__input-container">
+        <div className="loan-calculator__input-display">
           <p>How much do you want to borrow?</p>
-        </div>
-        <div className="loan-calculator__display-container">
+
           <InputGroup
             type="number"
             defaultValue={5000}
