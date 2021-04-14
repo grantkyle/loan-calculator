@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import "rsuite/dist/styles/rsuite-default.min.css";
 import { Slider, InputGroup, Input, RadioGroup, Radio } from "rsuite";
+import { clientUtilities } from "../clientUtilities";
 
 const loanAmountStyles = {
   width: 300,
@@ -16,7 +17,7 @@ function Calculator() {
 
   console.log(userLoanAmount);
 
-  // principal and interest
+  // principal & interest calculations
   const loanAmount = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
   const interestRateNumber = parseInt(interestRate) / 1200;
   const monthlyPayment =
@@ -26,7 +27,27 @@ function Calculator() {
   const totalInterest = totalLoanCost - loanAmount;
   console.log(`totalInterest`, totalInterest);
 
-  
+  // interest only calculations
+  const interestOnlyTotalInterest = loanAmount * interestRateNumber * loanTerm;
+  const interestOnlyTotalLoanCost = loanAmount + interestOnlyTotalInterest;
+  const interestOnlyMonthlyPayment = interestOnlyTotalInterest / loanTerm;
+  const interestOnlyLastPayment =
+    interestOnlyTotalLoanCost - interestOnlyMonthlyPayment * (loanTerm - 1);
+
+  // principal & interest currency formatted
+  const totalLoanCostCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(totalLoanCost)
+  );
+  const loanAmountCurrencyFormat = clientUtilities.formatMoney(
+    parseInt(userLoanAmount)
+  );
+  const monthlyPaymentCurrencyFormat = clientUtilities.formatMoney(Math.round(monthlyPayment));
+  const totalInterestCurrencyFormat = clientUtilities.formatMoney(Math.round(totalInterest));
+
+  // interest only formatted options
+
+  console.log(`totalLoanCostCurrencyFormat`, totalLoanCostCurrencyFormat);
+
   return (
     <div>
       <h1>Loan Calculator</h1>
@@ -132,24 +153,29 @@ function Calculator() {
         </div>
         {repaymentOption === "interestOnly" ? (
           <div className="loan-calculator__calculation-display">
-            <p>({loanTerm - 1} Months)</p>
+            <p>Monthly Payment ({loanTerm - 1} Months)</p>
             <p>Last Payment</p>
             <p>Loan Amount</p>
-            {loanAmount}
+            {loanAmountCurrencyFormat}
             <p>Interest Rate</p>
-            {interestRate}.00%<p>Total Loan Cost</p>
+            {interestRate}.00%
+            <p>Total Loan Cost</p>
+            {totalLoanCostCurrencyFormat}
             <p>Interest</p>
             <p>Collateral Needed </p>
             $$ USD worth of: cryptoValues
           </div>
         ) : (
           <div className="loan-calculator__calculation-display">
-            <p>({loanTerm} Months)</p>
+            <p>Monthly Payment ({loanTerm} Months)</p>
+            {monthlyPaymentCurrencyFormat}
             <p>Loan Amount</p>
-            {loanAmount}
+            {loanAmountCurrencyFormat}
             <p>Interest Rate</p> {interestRate}.00%
             <p>Total Loan Cost</p>
+            {totalLoanCostCurrencyFormat}
             <p>Interest</p>
+            {totalInterestCurrencyFormat}
             <p>Collateral Needed</p>
             $$ USD worth of:
           </div>
