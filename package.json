@@ -11,6 +11,7 @@
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-number-format": "^4.5.5",
     "react-scripts": "4.0.3",
     "rsuite": "^4.9.3",
     "sass-loader": "^11.0.1",
