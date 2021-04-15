@@ -44,13 +44,14 @@
 }
 
 .loan-calculator__ltv-label {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .loan-calculator__ltv-radio-group {
   border: none !important;
   display: flex !important;
   justify-content: space-between !important;
+  margin-bottom: 30px;
 }
 
 .asdf{
@@ -70,10 +71,12 @@ label {
   border-radius: 2px important;
 }
 
+
+
 .loan-calculator__repayment-option-radio-group {
   border: none !important;
   display: flex !important;
-  // justify-content: stretch !important;
+  margin-bottom: 50px;
 }
 
 .loan-calculator__calculation-display-container {
@@ -88,17 +91,19 @@ label {
   font-weight: 500;
   text-align: left;
   font-size: 12px;
+  margin-bottom: 5px;
 }
 
 .loan-calculator__last-payment{
-padding-top: 5px;
-margin-bottom: 20px;
+
+margin-bottom: 10px;
 }
 
 .loan-calculator__display-row {
   display: flex;
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  padding-top:10px;
 }
 
 .loan-calculator__display-items {
@@ -113,11 +118,13 @@ margin-bottom: 20px;
 .loan-calculator__currency-displays {
   text-align: left;
   font-weight: 600;
-  margin-top: 1px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .loan-calculator__collateral-needed-title {
-  margin-bottom: 5px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .loan-calculator__collateral-needed-display {
@@ -126,20 +133,37 @@ margin-bottom: 20px;
 
 .loan-calculator__coin-display-container {
   display: flex;
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 
 .loan-calculator__coin-symbol {
   width: 15px;
+  margin-right: 5px;
 }
 
 .loan-calculator__coin-display {
   column-count: 2;
+  column-gap: -100px;
   display: inline-block;
-  margin-left: -7px;
+  text-align-last:left;
+  margin-bottom: 20px;
 }
 
 li {
   list-style: none;
   font-size: 10px;
+  margin-bottom: 10px;
+}
+
+.loan-calculator__stake-salt-container {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.loan-calculator__stake-salt-display {
+  text-align: left;
+  font-weight: 300;
+  margin-top: 5px;
   margin-bottom: 5px;
 }

@@ -18,9 +18,9 @@ const Calculator = () => {
   const [loanTerm, setLoanTerm] = useState(12);
   const [interestRate, setInterestRate] = useState(10);
   const [repaymentOption, setRepaymentOption] = useState("interestOnly");
-
   const [cryptoData, setCryptoData] = useState([]);
 
+  // fetch API with useEffect
   const coinDataEndpoint =
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2C%20dash%2C%20ethereum%2C%20litecoin%2C%20dogecoin&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
@@ -32,23 +32,9 @@ const Calculator = () => {
     fetchData();
   }, []);
 
-  const loanRangeErrorNotification = (errorMessage) => {
-    Notification[errorMessage]({
-      title: "Error!",
-      description: (
-        <p style={{ width: 320 }} rows={3}>
-          Amount must be more than $5,000 and less than $25,000,000!
-          <br />
-          <br />
-          Page will refresh automatically.
-        </p>
-      ),
-    });
-  };
-
+  // handle loan range of <5,000 or >25,000,000
   const handleOnBlur = (e) => {
     const loanRange = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
-   
     if (loanRange < 5000) {
       loanRangeErrorNotification("error");
       setTimeout(() => {
@@ -63,6 +49,21 @@ const Calculator = () => {
     setUserLoanAmount(e.target.value);
   };
 
+  // notification for incorrect loan range
+  const loanRangeErrorNotification = (errorMessage) => {
+    Notification[errorMessage]({
+      title: "Error!",
+      description: (
+        <p style={{ width: 320 }} rows={3}>
+          Amount must be more than $5,000 and less than $25,000,000!
+          <br />
+          <br />
+          Page will refresh automatically.
+        </p>
+      ),
+    });
+  };
+
   // principal & interest calculations
   const loanAmount = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
   const interestRateNumber = interestRate / 1200;
@@ -72,14 +73,7 @@ const Calculator = () => {
   const totalLoanCost = monthlyPayment * loanTerm;
   const totalInterest = totalLoanCost - loanAmount;
 
-  // interest only calculations
-  const interestOnlyTotalInterest = loanAmount * interestRateNumber * loanTerm;
-  const interestOnlyTotalLoanCost = loanAmount + interestOnlyTotalInterest;
-  const interestOnlyMonthlyPayment = interestOnlyTotalInterest / loanTerm;
-  const interestOnlyLastPayment =
-    interestOnlyTotalLoanCost - interestOnlyMonthlyPayment * (loanTerm - 1);
-
-  // principal & interest currency formatted
+  // principal & interest currency formatted for display
   const totalLoanCostCurrencyFormat = clientUtilities.formatMoney(
     Math.round(totalLoanCost)
   );
@@ -90,7 +84,14 @@ const Calculator = () => {
     Math.round(totalInterest)
   );
 
-  // interest only formatted options
+  // interest only calculations
+  const interestOnlyTotalInterest = loanAmount * interestRateNumber * loanTerm;
+  const interestOnlyTotalLoanCost = loanAmount + interestOnlyTotalInterest;
+  const interestOnlyMonthlyPayment = interestOnlyTotalInterest / loanTerm;
+  const interestOnlyLastPayment =
+    interestOnlyTotalLoanCost - interestOnlyMonthlyPayment * (loanTerm - 1);
+
+  // interest only currency formatted for display
   const interestOnlyTotalInterestCurrencyFormat = clientUtilities.formatMoney(
     Math.round(interestOnlyTotalInterest)
   );
@@ -104,11 +105,17 @@ const Calculator = () => {
     Math.round(interestOnlyLastPayment)
   );
 
-  // collateral calculations
+  // collateral calculation and formatted for display
   const collateralNeeded = (2 / 3) * loanAmount + loanAmount;
   const collateralNeededCurrencyFormat = clientUtilities.formatMoney(
     Math.round(collateralNeeded)
   );
+
+  // stake salt calculation and formatted for display
+  const stakeSalt = loanAmount * 0.0981522;
+  const stakeSaltDisplayFormat = clientUtilities.numberWithCommas(Math.round(stakeSalt));
+
+
 
   const coinDisplayValues = cryptoData.map((item) => {
     const coinImage = item.image;
@@ -119,7 +126,7 @@ const Calculator = () => {
 
     return (
       <li>
-        <img className="loan-calculator__coin-symbol" src={coinImage} alt="" />{" "}
+        <img className="loan-calculator__coin-symbol" src={coinImage} alt="" />
         {coinPrice} {coinName}
       </li>
     );
@@ -147,26 +154,6 @@ const Calculator = () => {
             value={userLoanAmount}
             onBlur={handleOnBlur}
           />
-          {/* <InputGroup
-            className="loan-calculator__input-containers"
-            type="number"
-            defaultValue={5000}
-            min={5000}
-            max={25000000}
-            inside
-            styles={loanAmountStyles}
-            value={userLoanAmount}
-            onChange={(e) => {
-              setUserLoanAmount(e.target.value);
-            }}
-            onBlur={handleOnBlur}
-          >
-            <InputGroup.Addon>$</InputGroup.Addon>
-            <Input
-              className="loan-calculator__user-loan-amount-input"
-              placeholder="Enter amount"
-            />
-          </InputGroup> */}
           <p className="loan-calculator__input-labels">
             How long do you need to pay back?
           </p>
@@ -176,6 +163,7 @@ const Calculator = () => {
             defaultValue={12}
             step={1}
             progress
+            graduated
             min={3}
             max={36}
             onChange={(e) => {
@@ -224,7 +212,7 @@ const Calculator = () => {
             <Radio
               className="loan-calculator__ltv-selections"
               type="number"
-              value={10}
+              value={12}
             >
               60%
             </Radio>
@@ -236,7 +224,7 @@ const Calculator = () => {
               70%
             </Radio>
           </RadioGroup>
-          <p className="loan-calculator__input-labels">Repayment Option</p>
+          <p className="loan-calculator__input-labels loan">Repayment Option</p>
           <RadioGroup
             className="loan-calculator__repayment-option-radio-group"
             name="repaymentOptions"
@@ -336,6 +324,12 @@ const Calculator = () => {
               <div className="loan-calculator__coin-display">
                 {coinDisplayValues}
               </div>
+            </div>
+            <div className="loan-calculator__stake-salt-container">
+              <p className="loan-calculator__display-titles">Stake SALT</p>
+              <p className="loan-calculator__stake-salt-display">
+               <b> {stakeSaltDisplayFormat} </b> ∆
+              </p>
             </div>
           </div>
         </div>
