@@ -1,10 +1,31 @@
+.loan-calculator__slider-flexbox-container {
+  display: flex;
+}
+
+.loan-calculator__low-slider-value{
+  flex: 1;
+  margin-right: 5px;
+  margin-left: 2px;
+}
+
+.loan-calculator__high-slider-value{
+  flex: 1;
+  margin-left: 5px;
+  margin-right: 2px;
+}
+
+.loan-calculator__slider-container {
+  flex: 10;
+  padding-top: 7px;
+}
+
 .loan-calculator__title {
   color: #ffffff;
   font-weight: 600;
 }
 
 .loan-calculator__container {
-  width: 45%;
+  width: 50%;
   margin: auto !important;
   display: flex;
   border: solid #ffffff 1px;
@@ -14,7 +35,7 @@
 
 .loan-calculator__input-display-container {
   flex: 1;
-  background-color: #252c46;
+  background-color: #28283C;
   color: #ffffff;
   padding: 40px;
 }
@@ -25,7 +46,7 @@
 }
 
 .loan-calculator__user-loan-amount-input {
-  background-color: #28283d !important;
+  background-color: #323246 !important;
   border: 1px solid #ffffff;
   border-radius: 5px;
   height: 35px;
@@ -41,8 +62,6 @@
 .loan-calculator__loan-term-slider {
   margin-bottom: -10px;
 }
-
-// override styles for slider
 
 .loan-calculator__ltv-label {
   margin-top: 30px;
@@ -61,8 +80,22 @@
   margin-bottom: 50px;
 }
 
+.loan-calculator__repayment-option-containers {
+  flex: 1;
+}
+
 .loan-calculator__interest-only-text {
-  width: 100px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-weight: 500;
+  font-size: 12px !important;
+}
+
+
+.loan-calculator__principal-text {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px !important;
 }
 
 .loan-calculator__calculation-display-container {
@@ -71,6 +104,7 @@
   padding-top: 20px;
   flex: 1;
   padding-left: 40px;
+  padding-right: 30px;
 }
 
 .loan-calculator__monthly-payment-title {
@@ -153,13 +187,15 @@ li {
   margin-bottom: 5px;
 }
 
-// radio button default style overrides (not available as props from library)
+// ******** radio button default style overrides (not available as props from React Suite library) ********
 label {
+  font-size: 14px !important;
   color: #ffffff !important;
   border: 1px solid #ffffff !important;
   border-radius: 2px !important;
 }
 
+// override initial button styling to allow highlight on focus and correct color schema
 .rs-radio-group-picker .rs-radio-checked .rs-radio-checker > label {
   color: #000000 !important;
   background-color: #00ffc3 !important;
@@ -167,15 +203,19 @@ label {
   border-radius: 2px !important;
 }
 
-// slider default style overrides (not available as props from library)
+// ******** slider default style overrides (not available as props from React Suite library) ********
+
+// remove slider bar color
 .rs-slider-bar {
   background-color: #28283d !important;
 }
 
+// remove progress color 
 .rs-slider-graduator > ul > li.rs-slider-pass:before {
   border-color: #ffffff !important;
 }
 
+// graduated vertical line transformation
 .rs-slider-graduator > ul > li:before,
 .rs-slider-graduator > ul > li:last-child:after {
   width: 1px !important;
@@ -183,11 +223,12 @@ label {
   border-radius: 0% !important;
 }
 
+// remove blue border on slider grabber
 .rs-slider-handle:before {
   border: 1px solid #ffffff !important;
 }
 
-// media query for mobile responsiveness
+// ******** media queries for mobile responsiveness ********
 @media only screen and (max-width: 600px) {
   .loan-calculator__container {
     width: 100%;
@@ -196,16 +237,9 @@ label {
     flex-wrap: wrap;
     flex-direction: column;
   }
-  .loan-calculator__interest-only-text {
-    width: 145px;
-  }
-
-  .loan-calculator__principal-text {
-    width: 145px;
-  }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1024px) {
   .loan-calculator__container {
     width: 100%;
     margin: auto;

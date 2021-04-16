@@ -6,10 +6,9 @@ export const formatMoney = (amount) => {
   };
 
   const formatter = Intl.NumberFormat("en-US", options);
-
   return formatter.format(amount);
 };
 
 export const numberWithCommas = (num) => {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };

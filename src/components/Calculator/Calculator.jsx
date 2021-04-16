@@ -44,7 +44,7 @@ const Calculator = () => {
       loanRangeErrorNotification("error");
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 1000);
     }
     setUserLoanAmount(e.target.value);
   };
@@ -54,7 +54,11 @@ const Calculator = () => {
     Notification[errorMessage]({
       title: "Error!",
       description: (
-        <p style={{ width: 320 }} rows={3}>
+        <p
+          className="loan-calculator__error-notification-style"
+          style={{ width: 250 }}
+          rows={3}
+        >
           Amount must be more than $5,000 and less than $25,000,000!
           <br />
           <br />
@@ -157,21 +161,24 @@ const Calculator = () => {
           <p className="loan-calculator__input-labels">
             How long do you need to pay back?
           </p>
-
-          <Slider
-            className="loan-calculator__loan-term-slider"
-            type="range"
-            defaultValue={12}
-            step={1}
-            // progress
-            graduated
-            min={3}
-            max={36}
-            onChange={(e) => {
-              setLoanTerm(e);
-            }}
-          />
-
+          <div className="loan-calculator__slider-flexbox-container">
+            <div className="loan-calculator__low-slider-value">3</div>
+            <div className="loan-calculator__slider-container">
+              <Slider
+                className="loan-calculator__loan-term-slider"
+                type="range"
+                defaultValue={12}
+                step={1}
+                graduated
+                min={3}
+                max={36}
+                onChange={(e) => {
+                  setLoanTerm(e);
+                }}
+              />
+            </div>
+            <div className="loan-calculator__high-slider-value">36</div>
+          </div>
           <br />
           <b>{loanTerm} months</b>
           <p className="loan-calculator__input-labels loan-calculator__ltv-label">
@@ -235,24 +242,29 @@ const Calculator = () => {
             appearance="picker"
             defaultValue="interestOnly"
           >
-            <Radio
-              className="loan-calculator__repayment-options"
-              value="interestOnly"
-              onClick={() => setRepaymentOption("interestOnly")}
-            >
-              <div className="loan-calculator__interest-only-text">
-                {" "}
-                Interest Only{" "}
-              </div>
-            </Radio>
-            <Radio
-              className="loan-calculator__repayment-options"
-              value="principalPlusInterest"
-              onClick={() => setRepaymentOption("principalPlusInterest")}
-            >
-              <div className="loan-calculator__principal-text"></div>
-              Principal & Interest
-            </Radio>
+            <div className="loan-calculator__repayment-option-containers">
+              <Radio
+                className="loan-calculator__repayment-options"
+                value="interestOnly"
+                onClick={() => setRepaymentOption("interestOnly")}
+              >
+                <div className="loan-calculator__interest-only-text">
+                  {" "}
+                  Interest Only{" "}
+                </div>
+              </Radio>
+            </div>
+            <div className="loan-calculator__repayment-option-containers">
+              <Radio
+                className="loan-calculator__repayment-options"
+                value="principalPlusInterest"
+                onClick={() => setRepaymentOption("principalPlusInterest")}
+              >
+                <div className="loan-calculator__principal-text">
+                  Principal & Interest
+                </div>
+              </Radio>
+            </div>
           </RadioGroup>
         </div>
         <div className="loan-calculator__calculation-display-container">
