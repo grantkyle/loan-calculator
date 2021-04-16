@@ -1,27 +1,7 @@
-.loan-calculator__slider-flexbox-container {
-  display: flex;
-}
-
-.loan-calculator__low-slider-value{
-  flex: 1;
-  margin-right: 5px;
-  margin-left: 2px;
-}
-
-.loan-calculator__high-slider-value{
-  flex: 1;
-  margin-left: 5px;
-  margin-right: 2px;
-}
-
-.loan-calculator__slider-container {
-  flex: 10;
-  padding-top: 7px;
-}
-
 .loan-calculator__title {
   color: #ffffff;
   font-weight: 600;
+  margin-bottom: 30px;
 }
 
 .loan-calculator__container {
@@ -61,6 +41,27 @@
 
 .loan-calculator__loan-term-slider {
   margin-bottom: -10px;
+}
+
+.loan-calculator__slider-flexbox-container {
+  display: flex;
+}
+
+.loan-calculator__low-slider-value{
+  flex: 1;
+  margin-right: 5px;
+  margin-left: 2px;
+}
+
+.loan-calculator__high-slider-value{
+  flex: 1;
+  margin-left: 5px;
+  margin-right: 2px;
+}
+
+.loan-calculator__slider-container {
+  flex: 10;
+  padding-top: 7px;
 }
 
 .loan-calculator__ltv-label {
