@@ -4,7 +4,8 @@
 }
 
 .loan-calculator__container {
-  width: 80%;
+  width: 45%;
+  margin: auto !important;
   display: flex;
   border: solid #ffffff 1px;
   border-radius: 3px;
@@ -18,11 +19,6 @@
   padding: 40px;
 }
 
-.loan-calculator__input-containers {
-  width: 100% !important;
-  margin-bottom: 20px;
-}
-
 .loan-calculator__input-labels {
   text-align: left;
   padding-bottom: 10px;
@@ -34,7 +30,10 @@
   border-radius: 5px;
   height: 35px;
   padding-left: 20px;
+  width: 100% !important;
+  margin-bottom: 20px;
   &:focus {
+    border: 1px solid #ffffff !important;
     color: #ffffff;
   }
 }
@@ -42,6 +41,8 @@
 .loan-calculator__loan-term-slider {
   margin-bottom: -10px;
 }
+
+// override styles for slider
 
 .loan-calculator__ltv-label {
   margin-top: 30px;
@@ -54,29 +55,14 @@
   margin-bottom: 30px;
 }
 
-.asdf{
-  width: 50% !important;
-}
-
-label {
-  color: #ffffff !important;
-  border: 1px solid #ffffff !important;
-  border-radius: 2px !important;
-}
-
-.rs-radio-group-picker .rs-radio-checked .rs-radio-checker>label {
-  color: #000000 !important;
-  background-color: #00ffc3 !important;
-  border: 1px solid #00ffc3 !important;
-  border-radius: 2px important;
-}
-
-
-
 .loan-calculator__repayment-option-radio-group {
   border: none !important;
   display: flex !important;
   margin-bottom: 50px;
+}
+
+.loan-calculator__interest-only-text {
+  width: 100px;
 }
 
 .loan-calculator__calculation-display-container {
@@ -94,16 +80,15 @@ label {
   margin-bottom: 5px;
 }
 
-.loan-calculator__last-payment{
-
-margin-bottom: 10px;
+.loan-calculator__last-payment {
+  margin-bottom: 10px;
 }
 
 .loan-calculator__display-row {
   display: flex;
   text-align: left;
   margin-bottom: 10px;
-  padding-top:10px;
+  padding-top: 10px;
 }
 
 .loan-calculator__display-items {
@@ -137,16 +122,11 @@ margin-bottom: 10px;
   margin-bottom: 20px;
 }
 
-.loan-calculator__coin-symbol {
-  width: 15px;
-  margin-right: 5px;
-}
-
 .loan-calculator__coin-display {
   column-count: 2;
   column-gap: -100px;
   display: inline-block;
-  text-align-last:left;
+  text-align-last: left;
   margin-bottom: 20px;
 }
 
@@ -154,6 +134,11 @@ li {
   list-style: none;
   font-size: 10px;
   margin-bottom: 10px;
+}
+
+.loan-calculator__coin-symbol {
+  width: 15px;
+  margin-right: 5px;
 }
 
 .loan-calculator__stake-salt-container {
@@ -166,4 +151,75 @@ li {
   font-weight: 300;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+// radio button default style overrides (not available as props from library)
+label {
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 2px !important;
+}
+
+.rs-radio-group-picker .rs-radio-checked .rs-radio-checker > label {
+  color: #000000 !important;
+  background-color: #00ffc3 !important;
+  border: 1px solid #00ffc3 !important;
+  border-radius: 2px !important;
+}
+
+// slider default style overrides (not available as props from library)
+.rs-slider-bar {
+  background-color: #28283d !important;
+}
+
+.rs-slider-graduator > ul > li.rs-slider-pass:before {
+  border-color: #ffffff !important;
+}
+
+.rs-slider-graduator > ul > li:before,
+.rs-slider-graduator > ul > li:last-child:after {
+  width: 1px !important;
+  transform: scale(0.1, 1.3);
+  border-radius: 0% !important;
+}
+
+.rs-slider-handle:before {
+  border: 1px solid #ffffff !important;
+}
+
+// media query for mobile responsiveness
+@media only screen and (max-width: 600px) {
+  .loan-calculator__container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .loan-calculator__interest-only-text {
+    width: 145px;
+  }
+
+  .loan-calculator__principal-text {
+    width: 145px;
+  }
+}
+
+@media (max-width: 800px) {
+  .loan-calculator__container {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .loan-calculator__ltv-radio-group {
+    border: none !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-bottom: 30px;
+  }
 }

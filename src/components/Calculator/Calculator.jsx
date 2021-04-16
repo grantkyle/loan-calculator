@@ -113,9 +113,9 @@ const Calculator = () => {
 
   // stake salt calculation and formatted for display
   const stakeSalt = loanAmount * 0.0981522;
-  const stakeSaltDisplayFormat = clientUtilities.numberWithCommas(Math.round(stakeSalt));
-
-
+  const stakeSaltDisplayFormat = clientUtilities.numberWithCommas(
+    Math.round(stakeSalt)
+  );
 
   const coinDisplayValues = cryptoData.map((item) => {
     const coinImage = item.image;
@@ -141,7 +141,7 @@ const Calculator = () => {
             How much do you want to borrow?
           </p>
           <NumberFormat
-            className="loan-calculator__input-containers loan-calculator__user-loan-amount-input"
+            className="loan-calculator__user-loan-amount-input"
             defaultValue={5000}
             min={5000}
             max={25000000}
@@ -157,12 +157,13 @@ const Calculator = () => {
           <p className="loan-calculator__input-labels">
             How long do you need to pay back?
           </p>
+
           <Slider
-            className="loan-calculator__loan-term-slider loan-calculator__input-containers"
+            className="loan-calculator__loan-term-slider"
             type="range"
             defaultValue={12}
             step={1}
-            progress
+            // progress
             graduated
             min={3}
             max={36}
@@ -170,17 +171,18 @@ const Calculator = () => {
               setLoanTerm(e);
             }}
           />
+
           <br />
-          <b className="loan-calculator__loan-term-display">
-            {loanTerm} months
-          </b>
+          <b>{loanTerm} months</b>
           <p className="loan-calculator__input-labels loan-calculator__ltv-label">
             Loan-to-Value (LTV)
           </p>
           <RadioGroup
-            className="loan-calculator__input-containers loan-calculator__ltv-radio-group"
+            className="loan-calculator__ltv-radio-group"
             name="loanToValue"
             inline
+            progress
+            graduated
             appearance="picker"
             defaultValue={10}
             onChange={(e) => {
@@ -212,7 +214,7 @@ const Calculator = () => {
             <Radio
               className="loan-calculator__ltv-selections"
               type="number"
-              value={12}
+              value={10}
             >
               60%
             </Radio>
@@ -224,7 +226,8 @@ const Calculator = () => {
               70%
             </Radio>
           </RadioGroup>
-          <p className="loan-calculator__input-labels loan">Repayment Option</p>
+          <p className="loan-calculator__input-labels">Repayment Options</p>
+
           <RadioGroup
             className="loan-calculator__repayment-option-radio-group"
             name="repaymentOptions"
@@ -233,18 +236,21 @@ const Calculator = () => {
             defaultValue="interestOnly"
           >
             <Radio
-              className="loan-calculator__repayment-options asdf"
+              className="loan-calculator__repayment-options"
               value="interestOnly"
               onClick={() => setRepaymentOption("interestOnly")}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interest
-              Only&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <div className="loan-calculator__interest-only-text">
+                {" "}
+                Interest Only{" "}
+              </div>
             </Radio>
             <Radio
               className="loan-calculator__repayment-options"
-              value="interestPlusPrincipal"
-              onClick={() => setRepaymentOption("interestPlusPrincipal")}
+              value="principalPlusInterest"
+              onClick={() => setRepaymentOption("principalPlusInterest")}
             >
+              <div className="loan-calculator__principal-text"></div>
               Principal & Interest
             </Radio>
           </RadioGroup>
@@ -328,7 +334,7 @@ const Calculator = () => {
             <div className="loan-calculator__stake-salt-container">
               <p className="loan-calculator__display-titles">Stake SALT</p>
               <p className="loan-calculator__stake-salt-display">
-               <b> {stakeSaltDisplayFormat} </b> ∆
+                <b> {stakeSaltDisplayFormat} </b> ∆
               </p>
             </div>
           </div>
