@@ -4,8 +4,6 @@ import "./styles.scss";
 import "rsuite/dist/styles/rsuite-default.min.css";
 import {
   Slider,
-  InputGroup,
-  Input,
   RadioGroup,
   Radio,
   Notification,

@@ -43,6 +43,7 @@
   margin-bottom: -10px;
 }
 
+// slider custom styles to add vertical graduation lines and low and high range numbers
 .loan-calculator__slider-flexbox-container {
   display: flex;
 }
@@ -53,15 +54,15 @@
   margin-left: 2px;
 }
 
+.loan-calculator__slider-container {
+  flex: 10;
+  padding-top: 7px;
+}
+
 .loan-calculator__high-slider-value{
   flex: 1;
   margin-left: 5px;
   margin-right: 2px;
-}
-
-.loan-calculator__slider-container {
-  flex: 10;
-  padding-top: 7px;
 }
 
 .loan-calculator__ltv-label {
@@ -96,6 +97,7 @@
 .loan-calculator__principal-text {
   padding-left: 10px;
   padding-right: 10px;
+  font-weight: 500;
   font-size: 12px !important;
 }
 
