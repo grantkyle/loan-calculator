@@ -2,17 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles.scss";
 import "rsuite/dist/styles/rsuite-default.min.css";
-import {
-  Slider,
-  RadioGroup,
-  Radio,
-  Notification,
-} from "rsuite";
+import { Slider, RadioGroup, Radio, Notification } from "rsuite";
 import { clientUtilities } from "../clientUtilities";
 import NumberFormat from "react-number-format";
 
 const Calculator = () => {
-  const [userLoanAmount, setUserLoanAmount] = useState("");
+  const [userLoanAmount, setUserLoanAmount] = useState("5000");
   const [loanTerm, setLoanTerm] = useState(12);
   const [interestRate, setInterestRate] = useState(10);
   const [repaymentOption, setRepaymentOption] = useState("interestOnly");
@@ -32,6 +27,7 @@ const Calculator = () => {
 
   // handle loan range of <5,000 or >25,000,000
   const handleOnBlur = (e) => {
+    console.log(`e.target.value`, e.target.value);
     const loanRange = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
     if (loanRange < 5000) {
       loanRangeErrorNotification("error");
@@ -44,6 +40,7 @@ const Calculator = () => {
         window.location.reload();
       }, 1000);
     }
+
     setUserLoanAmount(e.target.value);
   };
 
@@ -144,9 +141,6 @@ const Calculator = () => {
           </p>
           <NumberFormat
             className="loan-calculator__user-loan-amount-input"
-            defaultValue={5000}
-            min={5000}
-            max={25000000}
             thousandSeparator={true}
             prefix={"$   "}
             placeholder={"$   5,000"}
@@ -155,6 +149,9 @@ const Calculator = () => {
             }}
             value={userLoanAmount}
             onBlur={handleOnBlur}
+            onFocus={() => {
+              setUserLoanAmount("");
+            }}
           />
           <p className="loan-calculator__input-labels">
             How long do you need to pay back?
@@ -186,8 +183,8 @@ const Calculator = () => {
             className="loan-calculator__ltv-radio-group"
             name="loanToValue"
             inline
-            progress
-            graduated
+            
+        
             appearance="picker"
             defaultValue={10}
             onChange={(e) => {

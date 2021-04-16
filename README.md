@@ -4,7 +4,7 @@ This application is made entirely with React. Styling is done with SASS and the 
 
 ## Dependencies
 
-axios, rsuite and node-sass
+axios, rsuite, react-number-format and node-sass
 
 ### Heroku Deployed Application 
 
