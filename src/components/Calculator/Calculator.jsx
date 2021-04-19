@@ -232,7 +232,7 @@ const Calculator = () => {
             <div class="loan-calculator__repayment-option-buttons">
               <input
                 type="radio"
-                id="interestOnly"
+                id="radio-one"
                 onClick={() => setRepaymentOption("interestOnly")}
                 name="repaymentOptions"
                 value="interestOnly"
@@ -241,7 +241,7 @@ const Calculator = () => {
               <label for="radio-one">Interest Only</label>
               <input
                 type="radio"
-                id="principalPlusInterest"
+                id="radio-two"
                 onClick={() => setRepaymentOption("principalPlusInterest")}
                 name="repaymentOptions"
                 value="principalPlusInterest"
