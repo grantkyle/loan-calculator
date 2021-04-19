@@ -156,6 +156,7 @@ const Calculator = () => {
           <p className="loan-calculator__input-labels">
             How long do you need to pay back?
           </p>
+
           <div className="loan-calculator__slider-flexbox-container">
             <div className="loan-calculator__low-slider-value">3</div>
             <div className="loan-calculator__slider-container">
@@ -183,8 +184,6 @@ const Calculator = () => {
             className="loan-calculator__ltv-radio-group"
             name="loanToValue"
             inline
-            
-        
             appearance="picker"
             defaultValue={10}
             onChange={(e) => {
@@ -228,39 +227,28 @@ const Calculator = () => {
               70%
             </Radio>
           </RadioGroup>
-          <p className="loan-calculator__input-labels">Repayment Options</p>
-
-          <RadioGroup
-            className="loan-calculator__repayment-option-radio-group"
-            name="repaymentOptions"
-            inline
-            appearance="picker"
-            defaultValue="interestOnly"
-          >
-            <div className="loan-calculator__repayment-option-containers">
-              <Radio
-                className="loan-calculator__repayment-options"
-                value="interestOnly"
+          <form class="form">
+            <p className="loan-calculator__input-labels">Repayment Options</p>
+            <div class="loan-calculator__repayment-option-buttons">
+              <input
+                type="radio"
+                id="radio-one"
                 onClick={() => setRepaymentOption("interestOnly")}
-              >
-                <div className="loan-calculator__interest-only-text">
-                  {" "}
-                  Interest Only{" "}
-                </div>
-              </Radio>
-            </div>
-            <div className="loan-calculator__repayment-option-containers">
-              <Radio
-                className="loan-calculator__repayment-options"
-                value="principalPlusInterest"
+                name="switch-one"
+                value="interestOnly"
+                checked
+              />
+              <label for="radio-one">Interest Only</label>
+              <input
+                type="radio"
+                id="radio-two"
                 onClick={() => setRepaymentOption("principalPlusInterest")}
-              >
-                <div className="loan-calculator__principal-text">
-                  Principal & Interest
-                </div>
-              </Radio>
+                name="switch-one"
+                value="principalPlusInterest"
+              />
+              <label for="radio-two">Principal & Interest</label>
             </div>
-          </RadioGroup>
+          </form>
         </div>
         <div className="loan-calculator__calculation-display-container">
           <div>
