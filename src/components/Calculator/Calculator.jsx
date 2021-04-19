@@ -228,24 +228,43 @@ const Calculator = () => {
             </Radio>
           </RadioGroup>
           <p className="loan-calculator__input-labels">Repayment Options</p>
-          <div className="loan-calculator__repayment-option-container">
-            <button
-              className="loan-calculator__repayment-option-buttons"
-              defaultValue="interestOnly"
-              value="interestOnly"
-              autoFocus
-              onClick={() => setRepaymentOption("interestOnly")}
-            >
-              Interest Only
-            </button>{" "}
-            <button
-              className="loan-calculator__repayment-option-buttons"
-              value="principalPlusInterest"
-              onClick={() => setRepaymentOption("principalPlusInterest")}
-            >
-              Principal & Interest
-            </button>
-          </div>
+          {repaymentOption === "interestOnly" ? (
+            <div className="loan-calculator__repayment-option-container">
+              <button
+                className="loan-calculator__repayment-option-buttons"
+                style={{ backgroundColor: "#00ffc3", color: "#000000", outline: '0' }}
+                value="interestOnly"
+                onClick={() => setRepaymentOption("interestOnly")}
+              >
+                Interest Only
+              </button>{" "}
+              <button
+                className="loan-calculator__repayment-option-buttons"
+                value="principalPlusInterest"
+                onClick={() => setRepaymentOption("principalPlusInterest")}
+              >
+                Principal & Interest
+              </button>
+            </div>
+          ) : (
+            <div className="loan-calculator__repayment-option-container">
+              <button
+                className="loan-calculator__repayment-option-buttons"
+                value="interestOnly"
+                onClick={() => setRepaymentOption("interestOnly")}
+              >
+                Interest Only
+              </button>{" "}
+              <button
+                className="loan-calculator__repayment-option-buttons"
+                style={{ backgroundColor: "#00ffc3", color: "#000000", outline: '0' }}
+                value="principalPlusInterest"
+                onClick={() => setRepaymentOption("principalPlusInterest")}
+              >
+                Principal & Interest
+              </button>
+            </div>
+          )}
         </div>
         <div className="loan-calculator__calculation-display-container">
           <div>
