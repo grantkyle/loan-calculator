@@ -232,8 +232,8 @@ const Calculator = () => {
             <button
               className="loan-calculator__repayment-option-buttons"
               defaultValue="interestOnly"
-              defaultChecked
               value="interestOnly"
+              autoFocus
               onClick={() => setRepaymentOption("interestOnly")}
             >
               Interest Only
