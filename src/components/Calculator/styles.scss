@@ -1,20 +1,4 @@
-.loan-calculator__repayment-option-buttons{
-  background-color: #28283d;
-  border: 1px solid #ffffff;  
-  border-radius: 2px;
-  flex: 1;
-  height: 40px;
-  font-size: 12px;
-  
-  &:focus {
-    color: #000000;
-    background: #00ffc3;
-    outline: 0;
-  }
-  
-}
-
-.loan-calculator__repayment-option-container{
+.loan-calculator__repayment-option-container {
   display: flex;
 }
 .loan-calculator__title {
@@ -34,7 +18,7 @@
 
 .loan-calculator__input-display-container {
   flex: 1;
-  background-color: #28283C;
+  background-color: #28283c;
   color: #ffffff;
   padding: 40px;
 }
@@ -67,7 +51,7 @@
   display: flex;
 }
 
-.loan-calculator__low-slider-value{
+.loan-calculator__low-slider-value {
   flex: 1;
   margin-right: 5px;
   margin-left: 2px;
@@ -78,7 +62,7 @@
   padding-top: 7px;
 }
 
-.loan-calculator__high-slider-value{
+.loan-calculator__high-slider-value {
   flex: 1;
   margin-left: 5px;
   margin-right: 2px;
@@ -105,13 +89,27 @@
   flex: 1;
 }
 
+.loan-calculator__repayment-option-buttons {
+  background-color: #28283d;
+  border: 1px solid #ffffff;
+  border-radius: 2px;
+  flex: 1;
+  height: 40px;
+  font-size: 12px;
+
+  &:focus {
+    color: #000000;
+    background: #00ffc3;
+    outline: 0;
+  }
+}
+
 .loan-calculator__interest-only-text {
   padding-left: 25px;
   padding-right: 25px;
   font-weight: 500;
   font-size: 12px !important;
 }
-
 
 .loan-calculator__principal-text {
   padding-left: 10px;
@@ -232,7 +230,7 @@ label {
   background-color: #28283d !important;
 }
 
-// remove progress color 
+// remove progress color
 .rs-slider-graduator > ul > li.rs-slider-pass:before {
   border-color: #ffffff !important;
 }
