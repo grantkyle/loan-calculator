@@ -227,28 +227,25 @@ const Calculator = () => {
               70%
             </Radio>
           </RadioGroup>
-          <form class="form">
-            <p className="loan-calculator__input-labels">Repayment Options</p>
-            <div class="loan-calculator__repayment-option-buttons">
-              <input
-                type="radio"
-                id="radio-one"
-                onClick={() => setRepaymentOption("interestOnly")}
-                name="repaymentOptions"
-                value="interestOnly"
-                checked
-              />
-              <label for="radio-one">Interest Only</label>
-              <input
-                type="radio"
-                id="radio-two"
-                onClick={() => setRepaymentOption("principalPlusInterest")}
-                name="repaymentOptions"
-                value="principalPlusInterest"
-              />
-              <label for="radio-two">Principal & Interest</label>
-            </div>
-          </form>
+          <p className="loan-calculator__input-labels">Repayment Options</p>
+          <div className="loan-calculator__repayment-option-container">
+            <button
+              className="loan-calculator__repayment-option-buttons"
+              defaultValue="interestOnly"
+              defaultChecked
+              value="interestOnly"
+              onClick={() => setRepaymentOption("interestOnly")}
+            >
+              Interest Only
+            </button>{" "}
+            <button
+              className="loan-calculator__repayment-option-buttons"
+              value="principalPlusInterest"
+              onClick={() => setRepaymentOption("principalPlusInterest")}
+            >
+              Principal & Interest
+            </button>
+          </div>
         </div>
         <div className="loan-calculator__calculation-display-container">
           <div>
