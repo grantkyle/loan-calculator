@@ -30,15 +30,13 @@ const Calculator = () => {
     const loanRange = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
     if (loanRange < 5000) {
       loanRangeErrorNotification("error");
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+     
     } else if (loanRange > 25000000) {
       loanRangeErrorNotification("error");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+    
     }
+
+    console.log(`userLoanAmount`, userLoanAmount)
 
     setUserLoanAmount(e.target.value);
   };

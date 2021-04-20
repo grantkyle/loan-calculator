@@ -5,6 +5,7 @@
   border: solid #ffffff 1px;
   border-radius: 3px;
   margin: 20px 0 0 0;
+  letter-spacing: .5px;
 }
 
 .loan-calculator__input-display-container {
@@ -12,6 +13,7 @@
   background-color: #28283c;
   color: #ffffff;
   padding: 50px;
+
 }
 
 .loan-calculator__input-labels {
@@ -107,7 +109,7 @@
 .loan-calculator__repayment-option-buttons {
   background-color: #28283d;
   border: 1px solid #ffffff;
-  border-radius: 2px;
+
   flex: 1;
   height: 50px;
   font-size: 14px;
@@ -120,8 +122,6 @@
   padding-top: 20px;
   flex: 1;
   padding: 50px;
-  // padding-left: 40px;
-  // padding-right: 30px;
 }
 
 .loan-calculator__monthly-payment-title {
@@ -230,6 +230,7 @@ li {
 .rs-slider-handle:before {
   border: 1px solid #ffffff !important;
 }
+
 
 // ******** media queries for mobile responsiveness ********
 @media only screen and (max-width: 600px) {
