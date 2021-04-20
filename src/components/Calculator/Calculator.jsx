@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles.scss";
 import "rsuite/dist/styles/rsuite-default.min.css";
-import { Slider, RadioGroup, Radio, Notification } from "rsuite";
+import { Slider, Notification } from "rsuite";
 import { clientUtilities } from "../clientUtilities";
 import NumberFormat from "react-number-format";
 
@@ -27,7 +27,6 @@ const Calculator = () => {
 
   // handle loan range of <5,000 or >25,000,000
   const handleOnBlur = (e) => {
-    console.log(`e.target.value`, e.target.value);
     const loanRange = Number(userLoanAmount.replace(/[^0-9\.-]+/g, ""));
     if (loanRange < 5000) {
       loanRangeErrorNotification("error");
@@ -89,6 +88,11 @@ const Calculator = () => {
   const interestOnlyMonthlyPayment = interestOnlyTotalInterest / loanTerm;
   const interestOnlyLastPayment =
     interestOnlyTotalLoanCost - interestOnlyMonthlyPayment * (loanTerm - 1);
+
+  // loan amount for currency display
+  const loanAmountCurrencyFormat = clientUtilities.formatMoney(
+    Math.round(loanAmount)
+  );
 
   // interest only currency formatted for display
   const interestOnlyTotalInterestCurrencyFormat = clientUtilities.formatMoney(
@@ -180,102 +184,141 @@ const Calculator = () => {
           <p className="loan-calculator__input-labels loan-calculator__ltv-label">
             Loan-to-Value (LTV)
           </p>
-          <RadioGroup
-            className="loan-calculator__ltv-radio-group"
-            name="loanToValue"
-            inline
-            appearance="picker"
-            defaultValue={10}
-            onChange={(e) => {
-              setInterestRate(e);
-            }}
-          >
-            <Radio
+          <div className="loan-calculator__ltv-radio-container">
+            <button
               className="loan-calculator__ltv-selections"
+              style={
+                interestRate === 7
+                  ? {
+                      backgroundColor: "#00ffc3",
+                      color: "#000000",
+                      fontWeight: "600",
+                    }
+                  : { backgroundColor: "#28283d", color: "#ffffff" }
+              }
               type="number"
               value={7}
+              onClick={() => setInterestRate(7)}
             >
               30%
-            </Radio>
+            </button>
 
-            <Radio
+            <button
               className="loan-calculator__ltv-selections"
+              style={
+                interestRate === 8
+                  ? {
+                      backgroundColor: "#00ffc3",
+                      color: "#000000",
+                      fontWeight: "600",
+                    }
+                  : { backgroundColor: "#28283d", color: "#ffffff" }
+              }
               type="number"
               value={8}
+              onClick={() => setInterestRate(8)}
             >
               40%
-            </Radio>
-            <Radio
+            </button>
+            <button
               className="loan-calculator__ltv-selections"
+              style={
+                interestRate === 9
+                  ? {
+                      backgroundColor: "#00ffc3",
+                      color: "#000000",
+                      fontWeight: "600",
+                    }
+                  : { backgroundColor: "#28283d", color: "#ffffff" }
+              }
               type="number"
               value={9}
+              onClick={() => setInterestRate(9)}
             >
               50%
-            </Radio>
-            <Radio
+            </button>
+            <button
               className="loan-calculator__ltv-selections"
+              style={
+                interestRate === 10
+                  ? {
+                      backgroundColor: "#00ffc3",
+                      color: "#000000",
+                      fontWeight: "600",
+                    }
+                  : { backgroundColor: "#28283d", color: "#ffffff" }
+              }
               type="number"
               value={10}
+              onClick={() => setInterestRate(10)}
             >
               60%
-            </Radio>
-            <Radio
+            </button>
+            <button
               className="loan-calculator__ltv-selections"
+              style={
+                interestRate === 11
+                  ? {
+                      backgroundColor: "#00ffc3",
+                      color: "#000000",
+                      fontWeight: "600",
+                    }
+                  : { backgroundColor: "#28283d", color: "#ffffff" }
+              }
               type="number"
               value={11}
+              onClick={() => setInterestRate(11)}
             >
               70%
-            </Radio>
-          </RadioGroup>
+            </button>
+          </div>
           <p className="loan-calculator__input-labels">Repayment Options</p>
-          {repaymentOption === "interestOnly" ? (
-            <div className="loan-calculator__repayment-option-container">
-              <button
-                className="loan-calculator__repayment-option-buttons"
-                style={{ backgroundColor: "#00ffc3", color: "#000000", outline: '0' }}
-                value="interestOnly"
-                onClick={() => setRepaymentOption("interestOnly")}
-              >
-                Interest Only
-              </button>{" "}
-              <button
-                className="loan-calculator__repayment-option-buttons"
-                value="principalPlusInterest"
-                onClick={() => setRepaymentOption("principalPlusInterest")}
-              >
-                Principal & Interest
-              </button>
-            </div>
-          ) : (
-            <div className="loan-calculator__repayment-option-container">
-              <button
-                className="loan-calculator__repayment-option-buttons"
-                value="interestOnly"
-                onClick={() => setRepaymentOption("interestOnly")}
-              >
-                Interest Only
-              </button>{" "}
-              <button
-                className="loan-calculator__repayment-option-buttons"
-                style={{ backgroundColor: "#00ffc3", color: "#000000", outline: '0' }}
-                value="principalPlusInterest"
-                onClick={() => setRepaymentOption("principalPlusInterest")}
-              >
-                Principal & Interest
-              </button>
-            </div>
-          )}
+
+          <div className="loan-calculator__repayment-option-container">
+            <button
+              className="loan-calculator__repayment-option-buttons"
+              style={
+                repaymentOption === "interestOnly"
+                  ? {
+                      backgroundColor: "#00ffc3",
+                      color: "#000000",
+                      fontWeight: "600",
+                    }
+                  : { backgroundColor: "#28283d", color: "#ffffff" }
+              }
+              value="interestOnly"
+              onClick={() => setRepaymentOption("interestOnly")}
+            >
+              Interest Only
+            </button>{" "}
+            <button
+              className="loan-calculator__repayment-option-buttons"
+              style={
+                repaymentOption === "principalPlusInterest"
+                  ? {
+                      backgroundColor: "#00ffc3",
+                      color: "#000000",
+                      fontWeight: "600",
+                    }
+                  : { backgroundColor: "#28283d", color: "#ffffff" }
+              }
+              value="principalPlusInterest"
+              onClick={() => setRepaymentOption("principalPlusInterest")}
+            >
+              Principal & Interest
+            </button>
+          </div>
         </div>
         <div className="loan-calculator__calculation-display-container">
           <div>
             {repaymentOption === "interestOnly" ? (
               <div>
                 <p className="loan-calculator__monthly-payment-title">
-                  Monthly Payment ({loanTerm - 1} Months)
+                  Monthly Payment ({loanTerm - 1} months)
                 </p>
-                <h3 style={{ textAlign: "left" }}>
+                <h2 style={{ textAlign: "left" }}>
                   {interestOnlyMonthlyPaymentCurrencyFormat}
-                </h3>
+                </h2>
                 <p className="loan-calculator__currency-displays loan-calculator__last-payment">
                   Last Payment: {interestOnlyLastPaymentCurrencyFormat}
                 </p>
@@ -296,7 +339,7 @@ const Calculator = () => {
               <div className="loan-calculator__display-items">
                 <p className="loan-calculator__display-titles">Loan Amount</p>
                 <p className="loan-calculator__currency-displays">
-                  {userLoanAmount ? userLoanAmount : "$0"}
+                  {loanAmountCurrencyFormat ? loanAmountCurrencyFormat : "$0"}
                 </p>
               </div>
               <div className="loan-calculator__display-items">
