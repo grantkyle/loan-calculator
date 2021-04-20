@@ -52,9 +52,6 @@ const Calculator = () => {
           rows={3}
         >
           Amount must be more than $5,000 and less than $25,000,000!
-          <br />
-          <br />
-          Page will refresh automatically.
         </p>
       ),
     });
