@@ -330,9 +330,9 @@ const Calculator = () => {
                     Monthly Payment ({loanTerm} Months)
                   </p>
                 </div>
-                <h3 style={{ textAlign: "left" }}>
+                <h2 style={{ textAlign: "left" }}>
                   {monthlyPaymentCurrencyFormat}
-                </h3>
+                </h2>
               </div>
             )}
             <div className="loan-calculator__display-row">
